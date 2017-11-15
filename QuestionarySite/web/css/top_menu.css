@@ -1,0 +1,117 @@
+@font-face{
+    font-family: ballpark;
+    src: url(../fonts/ballpark.ttf);
+}
+
+a{
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: none;
+}
+
+a:target {
+    text-decoration: none;
+}
+
+body {
+/*    color: #222222;*/
+    background-color: #f2faff;
+    
+}
+
+.modal-dialog {
+    width: 350px;
+}
+
+.top-menu{
+    background-color: #03A9F4;
+    border-bottom: 4px solid #f2faff;
+   
+}
+
+#top-header{
+    background-color: #03A9F4;
+    padding-top: 12px;
+    padding-bottom: 10px;
+}
+
+.logo {
+    color: #202020;
+    font-size: 29px;
+    font-family: ballpark;
+}
+
+.logo:hover {
+    color: #202020;
+}
+
+nav a{
+    color: #222222;
+    padding: 6px 8px;
+    display: block;
+}
+
+nav .list-inline>li{
+    padding-right: 15px;
+/*    background: url(..) no-repeat 100% 50%;*/
+}
+
+nav a:hover, .log-in {
+    color: #222222;
+}
+
+nav li.active a, nav a:hover,  .log-in a:hover{
+    background: #4FC3F7;
+    border-radius: 7px;
+    
+}
+
+.top-search {
+     background: #B3E5FC;
+    border-radius: 7px;
+}
+
+.log-in a {
+    padding: 4px 5px;
+    color: #222222;
+    
+}
+.log-in {
+    padding-top: 6px;
+}
+
+.top-button-search {
+    width: 20%;
+}
+
+.top-search input[type="text"] {
+    width: 77%;
+    outline: none;
+    color: #222222;
+    padding: 1px 5px;
+}
+
+.top-search input, .top-button-search {
+    background: transparent;
+    border: none;
+}
+
+.search-modul form, .top-search {
+    border-radius: 10px;
+    border-top: 1px solid #039BE5;
+    display: block;
+    margin-top: 5px;
+}
+
+/*
+.main-part-container {
+    background-color: #f5f5f5;
+    padding-right: 75px;
+    padding-left: 75px;
+}
+
+.main-part {
+    background-color: #fafafa;
+}*/

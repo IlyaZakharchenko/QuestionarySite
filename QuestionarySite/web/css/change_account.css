@@ -1,0 +1,104 @@
+#ava {
+    background-color: #e5f5ff;
+    margin-right: 10px;
+    margin-bottom: 5px;
+}
+
+.information {
+    background-color: #e5f5ff;
+    margin-bottom: 5px;
+    border-radius: 4px;
+    padding-bottom: 250px;
+}
+
+
+.information-part, .interface-part {
+    padding: 0px 0px;
+/*    background-color: #e5f5ff;*/
+}
+
+.input-change {
+    margin-top: 20px;
+}
+
+.image-preview-input {
+    position: relative;
+	overflow: hidden;
+	margin: 0px;    
+    color: #333;
+    background-color: #fff;
+    border-color: #ccc;    
+}
+.image-preview-input input[type=file] {
+	position: absolute;
+	top: 0;
+	right: 0;
+	margin: 0;
+	padding: 0;
+	font-size: 20px;
+	cursor: pointer;
+	opacity: 0;
+	filter: alpha(opacity=0);
+}
+.image-preview-input-title {
+    margin-left:2px;
+}
+
+input {
+    border: auto;
+}
+
+.main-part-container {
+    margin-top: 0px;
+}
+
+
+.general {
+    padding: 20px 30px 10px 30px;
+    
+}
+
+.name {
+    display: block;
+}
+
+.general label{
+    font-size: 14px;
+    margin-top: 5px;
+}
+
+.general input {
+    width: 50%;
+    font-size: 14px;
+}
+
+.header label{
+    font-size: 20px;
+}
+
+.dangarous {
+    padding: 0px 30px 10px 10px;
+    
+}
+
+.new-password {
+    margin-top: 10px;
+    margin-left: 30px;
+}
+
+.new-password input {
+    width: 50%;
+    height: 25px;
+}
+
+.new-password .usual-text {
+   margin-top: 5px;
+}
+
+.ok-btn {
+    background-color: #81D4FA;
+    padding: 4px 10px;
+    border: 0px;
+    border-top: 1px solid #00BCD4;
+    border-radius: 5px;
+}

@@ -1,0 +1,136 @@
+.main-part-container {
+    padding: 50px 60px;
+    background-color: #e5f5ff;
+    border-radius: 5px;
+    padding-bottom: 150px;
+}
+
+.name-field {
+    font-size: 18px;
+    padding-left: 10px;
+    padding-top: 10px;
+}
+
+
+
+/*
+#answer input {
+    width: 65%;
+    margin-right: 15px;
+}
+*/
+
+.check {
+    padding: 0px 0px;
+}
+
+.usual-text {
+    padding-left: 10px;
+    font-size: 14px;
+}
+
+.can-comment {
+    padding: 0px 0px;
+}
+
+.check select, .can-comment select {
+    width: 15%;
+    padding-left: 4px;
+}
+
+.container-description {
+  padding: 30px 60px;
+    margin-left: 15%;
+    margin-right: 15%;
+    margin-top: 120px;
+    max-width: 70%;
+/*  width: 100% !important;*/
+  background-color: #F7F7F7;
+/*  margin: 0 auto;*/
+  border-radius: 2px;
+  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+  overflow: hidden;
+/*  font-family: roboto;*/
+}
+
+textarea {
+    resize: none;
+}
+
+#description-text {
+/*    resize: none;*/
+/*
+    margin-left: 15px;
+    margin-right: 15px;
+    
+*/
+}
+
+.var {
+    margin-right: 15px;
+    margin-bottom: 15px;
+}
+
+.input-group {
+    margin-bottom: 15px;
+}
+
+.image-preview-input, .add-description, .image-preview-clear, .image-clear-des, .imag-des {
+    position: relative;
+	overflow: hidden;
+	margin: 0px;    
+    color: #333;
+    background-color: #fff;
+    border-color: #ccc; 
+    
+}
+.image-preview-input input[type=file],  .imag-des input {
+	position: absolute;
+	top: 0;
+	right: 0;
+	margin: 0;
+	padding: 0;
+	font-size: 12px;
+	cursor: pointer;
+	opacity: 0;
+	filter: alpha(opacity=0);
+}
+
+.glyphicon, .image-preview-input-title {
+    margin-left: 6px;
+}
+
+.image-preview-input, .imag-des{
+    padding: 1px 4px;
+}
+.image-preview-clear, .image-clear-des {
+    padding-top: 2px;
+    padding-bottom: 0px;
+    padding-left: 0px;
+    padding-right: 6px;
+}
+
+.add-description {
+    border-top-width: thin;
+    border-bottom-width: thin;
+    border-left-width: thin;
+    border-right-width: thin;
+    border-color: #ccc;
+    border-bottom-color: #fff;
+    font-size: 14px;
+    padding: 1px 6px;
+}
+
+
+.ok-btn {
+    background-color: #81D4FA;
+    padding: 4px 10px;
+    border: 0px;
+    border-top: 1px solid #00BCD4;
+    border-radius: 5px;
+}
+
+.add-link {
+    margin-bottom: 10px;
+    margin-top: 5px;
+}

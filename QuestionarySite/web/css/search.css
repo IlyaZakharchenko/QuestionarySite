@@ -1,0 +1,34 @@
+.concrete-interview {
+    padding: 10px 15px;
+    background-color: #e5f5ff;
+    border-radius: 8px;
+    padding-bottom: 45px;
+}
+
+.ok-btn {
+    background-color: #81D4FA;
+    padding: 4px 10px;
+    border: 0px;
+    border-top: 1px solid #00BCD4;
+    border-radius: 5px;
+}
+
+label {
+    margin-bottom: 0px;
+    margin-left: 3px;
+}
+
+.head{
+    color: #222222;
+    font-size: 18px;
+   
+}
+.interview-image {
+    margin-left: 15px;
+    max-height: 250px;
+    max-width: 250px;
+}
+
+.interviews {
+    margin-top: 15px;
+}
