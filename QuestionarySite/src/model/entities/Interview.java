@@ -8,7 +8,6 @@ public class Interview {
     private int id;
 
     private String question;
-
     private User owner;
     private int ownerId;
     private Date date;
@@ -20,6 +19,7 @@ public class Interview {
     private boolean canComment;
     private List<Commentary> commentaries;
     private List<Option> options;
+
     public Interview() {
 
     }
@@ -133,5 +133,9 @@ public class Interview {
 
     public void setOptions(List<Option> options) {
         this.options = options;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }

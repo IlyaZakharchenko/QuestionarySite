@@ -29,17 +29,19 @@ public class UserDAO extends AbstractDAO<User> {
         try {
             PreparedStatement st = connection.prepareStatement(
                     "INSERT INTO users (email, password, username, age, about_yourself, img_path)" +
-                            "VALUES (?, ?, ?, ?, ?, ?);"
+                            "VALUES (?, ?, ?, ?, ?, ?) RETURNING id;"
             );
 
-        st.setString(1, user.getEmail());
-        st.setString(2, user.getPassword());
-        st.setString(3, user.getUsername());
-        st.setInt(4, user.getAge());
-        st.setString(5, user.getAboutYourself());
-        st.setString(6, user.getImgPath());
+            st.setString(1, user.getEmail());
+            st.setString(2, user.getPassword());
+            st.setString(3, user.getUsername());
+            st.setInt(4, user.getAge());
+            st.setString(5, user.getAboutYourself());
+            st.setString(6, user.getImgPath());
 
-        st.executeUpdate();
+            st.execute();
+            ResultSet rs = st.getResultSet();
+            if (rs.next()) user.setId(rs.getInt("id"));
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -48,8 +50,7 @@ public class UserDAO extends AbstractDAO<User> {
 
     @Override
     public User read(int id) {
-
-        ResultSet rs = null;
+        User user = null;
 
         try {
             PreparedStatement st = connection.prepareStatement(
@@ -58,20 +59,33 @@ public class UserDAO extends AbstractDAO<User> {
 
             st.setInt(1, id);
 
-            rs = st.executeQuery();
+
+            ResultSet rs = st.executeQuery();
+                if (rs.next()) {
+                    user = new User(
+                            rs.getInt("id"),
+                            rs.getString("email"),
+                            rs.getString("password"),
+                            rs.getString("username"),
+                            rs.getInt("age"),
+                            rs.getString("about_yourself"),
+                            rs.getString("img_path"),
+                            rs.getString("cookie")
+                    );
+                }
 
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        return user;
 
-        return fillUser(rs);
     }
 
     @Override
     public void update(User user) {
         try {
             PreparedStatement st = connection.prepareStatement(
-                    "UPDATE users SET username=?, password=?, username=?, age=?, about_yourself=?, img_path=? WHERE id=?;"
+                    "UPDATE users SET email=?, password=?, username=?, age=?, about_yourself=?, img_path=? WHERE id=?;"
             );
 
             st.setString(1, user.getEmail());
@@ -96,9 +110,9 @@ public class UserDAO extends AbstractDAO<User> {
                     "DELETE FROM users WHERE id=?;"
             );
 
-        st.setInt(1, id);
+            st.setInt(1, id);
 
-        st.executeUpdate();
+            st.executeUpdate();
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -114,9 +128,9 @@ public class UserDAO extends AbstractDAO<User> {
                     "SELECT * FROM users WHERE cookie=?;"
             );
 
-        st.setString(1, cookie);
+            st.setString(1, cookie);
 
-        rs = st.executeQuery();
+            rs = st.executeQuery();
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -137,18 +151,7 @@ public class UserDAO extends AbstractDAO<User> {
             st.setString(1, username);
 
             ResultSet rs = st.executeQuery();
-            if (rs.next()) {
-                user = new User(
-                        rs.getInt("id"),
-                        rs.getString("email"),
-                        rs.getString("password"),
-                        rs.getString("username"),
-                        rs.getInt("age"),
-                        rs.getString("about_yourself"),
-                        rs.getString("img_path"),
-                        rs.getString("cookie")
-                );
-            }
+            user = fillUser(rs);
 
 
         } catch (SQLException e) {
@@ -185,10 +188,10 @@ public class UserDAO extends AbstractDAO<User> {
                     "UPDATE users SET cookie=? WHERE username=?"
             );
 
-        st.setString(1, cookie);
-        st.setString(2, username);
+            st.setString(1, cookie);
+            st.setString(2, username);
 
-        st.executeUpdate();
+            st.executeUpdate();
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -200,7 +203,7 @@ public class UserDAO extends AbstractDAO<User> {
         User user = null;
 
         try {
-            if(rs.next()) {
+            if (rs.next()) {
                 user = new User(
                         rs.getInt("id"),
                         rs.getString("email"),
@@ -212,9 +215,62 @@ public class UserDAO extends AbstractDAO<User> {
                         rs.getString("cookie")
                 );
             }
+            if (user != null) user.setInterviews(InterviewDAO.getDao().getInterviewsByOwnerId(user.getId()));
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return user;
+    }
+
+    public void updateImgPathByUsername(String path, String username) {
+        try {
+            PreparedStatement st = connection.prepareStatement(
+                    "UPDATE users SET img_path=? WHERE username=?"
+            );
+
+            st.setString(1, path);
+            st.setString(2, username);
+
+            st.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void updatePasswordById(String password, int id) {
+        try {
+            PreparedStatement st = connection.prepareStatement(
+                    "UPDATE users SET password=? WHERE id=?"
+            );
+
+            st.setString(1, password);
+            st.setInt(2, id);
+
+            st.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public User getUserById(int id) {
+        ResultSet rs = null;
+        try {
+            PreparedStatement st = connection.prepareStatement(
+                    "SELECT * FROM users WHERE id=?;"
+            );
+
+            st.setInt(1, id);
+
+            rs = st.executeQuery();
+
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+
+        return fillUser(rs);
     }
 }

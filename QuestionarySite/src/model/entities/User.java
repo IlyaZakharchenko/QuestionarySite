@@ -1,5 +1,7 @@
 package model.entities;
 
+import model.database.InterviewDAO;
+
 import java.util.List;
 import java.util.Map;
 
@@ -21,6 +23,7 @@ public class User {
 
     private String cookie;
     private List<Commentary> commentaries;
+    private List<Interview> interviews;
     private List<Map<Interview, Option>> answers;
 
     public User() {
@@ -35,6 +38,14 @@ public class User {
         this.aboutYourself = aboutYourself;
         this.imgPath = imgPath;
         this.cookie = cookie;
+    }
+
+    public List<Interview> getInterviews() {
+        return interviews;
+    }
+
+    public void setInterviews(List<Interview> interviews) {
+        this.interviews = interviews;
     }
 
     public String getCookie() {
@@ -115,6 +126,10 @@ public class User {
 
     public void setAnswers(List<Map<Interview, Option>> answers) {
         this.answers = answers;
+    }
+
+    public void updateInterviews() {
+
     }
 
 }

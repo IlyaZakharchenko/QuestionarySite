@@ -62,7 +62,7 @@ nav a:hover, .log-in {
     color: #222222;
 }
 
-nav li.active a, nav a:hover,  .log-in a:hover{
+nav li.active a, nav a:hover,  .log-in a.active, .log-in a:hover{
     background: #4FC3F7;
     border-radius: 7px;
     

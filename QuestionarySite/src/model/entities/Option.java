@@ -36,6 +36,13 @@ public class Option {
         this.voteCount = voteCount;
     }
 
+    public Option(String answer, String description, int interviewId, int voteCount) {
+        this.answer = answer;
+        this.description = description;
+        this.interviewId = interviewId;
+        this.voteCount = voteCount;
+    }
+
     public String getImgPath() {
         return imgPath;
     }
@@ -103,5 +110,9 @@ public class Option {
 
     public void setVoteCount(int voteCount) {
         this.voteCount = voteCount;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }

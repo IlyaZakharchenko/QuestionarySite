@@ -11,7 +11,6 @@ public class ThemeDAO extends AbstractDAO<Theme> {
 
     private static ThemeDAO dao;
 
-    private Connection connection;
 
     public static ThemeDAO getDao() {
         if (dao == null) {
@@ -20,17 +19,23 @@ public class ThemeDAO extends AbstractDAO<Theme> {
         return dao;
     }
 
+    private ThemeDAO() {
+        super();
+    }
+
 
     @Override
     public void create(Theme theme) {
         try {
             PreparedStatement st = connection.prepareStatement(
-                    "INSERT INTO themes (name) VALUES (?);"
+                    "INSERT INTO themes (name) VALUES (?) RETURNING id;"
             );
 
             st.setString(1, theme.getName());
 
-            st.executeUpdate();
+            st.execute();
+            ResultSet rs = st.getResultSet();
+            if (rs.next()) theme.setId(rs.getInt("id"));;
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -51,10 +56,12 @@ public class ThemeDAO extends AbstractDAO<Theme> {
 
             ResultSet rs = st.executeQuery();
 
-            theme = new Theme(
-                    rs.getInt("id"),
-                    rs.getString("name")
-            );
+            if (rs.next()) {
+                theme = new Theme(
+                        rs.getInt("id"),
+                        rs.getString("name")
+                );
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -93,5 +100,30 @@ public class ThemeDAO extends AbstractDAO<Theme> {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    public Theme getThemeByName(String name) {
+        Theme theme = null;
+
+        try {
+
+            PreparedStatement st = connection.prepareStatement(
+                    "SELECT * FROM themes WHERE name=?;"
+            );
+
+            st.setString(1, name);
+
+            ResultSet rs = st.executeQuery();
+            if (rs.next()) {
+                theme = new Theme(
+                        rs.getInt("id"),
+                        rs.getString("name")
+                );
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return theme;
     }
 }

@@ -5,17 +5,17 @@
         <div class="container top-container" id="top-header">
             <div class="row">
                 <div class="col-md-2 text-center">
-                    <a href="#" class="logo" title="Inservey">Inservey</a>
+                    <a href="/main" class="logo" title="Inservey">Inservey</a>
                 </div>
                 <div class="col-md-6">
 
                     <nav>
                         <ul class="list-inline pull-left menus-item">
-                            <li class="<#--<#if cur_page == "">active </#if>-->"><a href="#" title="link">Главная</a>
+                            <li class="<#if cur_page == "main">active </#if>"><a href="/main" title="link">Главная</a>
                             </li>
-                            <li class="<#--<#if cur_page == "">active </#if>-->"><a href="#" title="link">Популярное</a>
+                            <li class="<#if cur_page == "list">active </#if>"><a href="/list" title="link">Список опросов</a>
                             </li>
-                            <li class="<#--<#if cur_page == "">active </#if>-->"><a href="#" title="link">Создать
+                            <li class="<#if cur_page == "create">active </#if>"><a href="/create" title="link">Создать
                                 опрос</a></li>
                             <li class="<#if cur_page == "about">active </#if>"><a href="/about" title="link">О сайте</a>
                             </li>
@@ -24,18 +24,18 @@
                 </div>
                 <div class="col-md-2 log-in menus-item">
                     <#if user??>
-                        <span>${user.username}</span>
+                        <a class="<#if  cur_page == "my_profile">active </#if>" id="top_user_name" href="/profile?id=${user.getId()}" style="text-decoration: none">${user.username}</a>
                         <a href="" title="exit" onclick="exit()">Выйти</a>
                     <#else >
                         <a href="#sign-in-modal" title="log in" data-toggle="modal">Вход</a>
-                        <img src="img/slash.png" width="6px">
+                        <img src="../img/slash.png" width="6px">
                         <a href="#register-modal" title="registr" data-toggle="modal">Регистрация</a>
                     </#if>
                 </div>
                 <div class="col-md-2 text-center">
-                    <form action="#" class="top-search">
-                        <input type="text">
-                        <button class="top-button-search"><img src="img/search.png" alt="search" width=100%></button>
+                    <form action="/search" method="post" class="top-search">
+                        <input type="text" name="search_text">
+                        <button class="top-button-search"><img src="../img/search.png" alt="search" width=100%></button>
                     </form>
                 </div>
             </div>

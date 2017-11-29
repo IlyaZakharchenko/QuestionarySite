@@ -83,4 +83,8 @@ public class Commentary {
     public void setDate(Date date) {
         Date = date;
     }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 }

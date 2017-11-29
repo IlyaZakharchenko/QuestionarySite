@@ -3,4 +3,25 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
          version="3.1">
+
+    <filter-mapping>
+        <filter-name>CookiesFilter</filter-name>
+        <servlet-name>MainServlet</servlet-name>
+        <servlet-name>MyProfileServlet</servlet-name>
+        <servlet-name>AboutServlet</servlet-name>
+        <servlet-name>AccountSettingsServlet</servlet-name>
+        <servlet-name>CreateInterviewServlet</servlet-name>
+        <servlet-name>AddMyCommentServlet</servlet-name>
+        <servlet-name>ConcreteInterviewServlet</servlet-name>
+        <servlet-name>SearchServlet</servlet-name>
+    </filter-mapping>
+
+    <filter-mapping>
+        <filter-name>AuthFilter</filter-name>
+        <servlet-name>MyProfileServlet</servlet-name>
+        <servlet-name>ImageChangeServlet</servlet-name>
+        <servlet-name>AccountSettingsServlet</servlet-name>
+        <servlet-name>CreateInterviewServlet</servlet-name>
+        <servlet-name>AddMyCommentServlet</servlet-name>
+    </filter-mapping>
 </web-app>

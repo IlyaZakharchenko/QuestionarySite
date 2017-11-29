@@ -26,7 +26,7 @@ public class AjaxSignUpServlet extends HttpServlet {
 
         JSONObject jo = new JSONObject();
 
-        boolean emailErr = !email.matches(".*@(mail\\.ru|yandex\\.ru|google\\.com)");
+        boolean emailErr = !email.matches(".*@(mail\\.ru|yandex\\.ru|gmail\\.com)");
         boolean passLength = password.length() < 6;
         boolean passNotEqual = !password.equals(confirmPass);
 

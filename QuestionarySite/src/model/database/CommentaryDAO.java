@@ -3,6 +3,8 @@ package model.database;
 import model.entities.Commentary;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class CommentaryDAO extends AbstractDAO<Commentary> {
 
@@ -14,6 +16,10 @@ public class CommentaryDAO extends AbstractDAO<Commentary> {
             dao = new CommentaryDAO();
         }
         return dao;
+    }
+
+    private CommentaryDAO() {
+        super();
     }
 
     @Override
@@ -85,17 +91,51 @@ public class CommentaryDAO extends AbstractDAO<Commentary> {
         try {
             PreparedStatement st = connection.prepareStatement(
                     "INSERT INTO commentaries (content, user_id, interview_id, date)" +
-                            "VALUES (?, ?, ?, ?);"
+                            "VALUES (?, ?, ?, ?) RETURNING id;"
             );
         st.setString(1, commentary.getContent());
         st.setInt(2, commentary.getUserId());
         st.setInt(3, commentary.getInterviewId());
         st.setDate(4, commentary.getDate());
 
-        st.executeUpdate();
+            st.execute();
+            ResultSet rs = st.getResultSet();
+            if (rs.next()) commentary.setId(rs.getInt("id"));
 
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    public List<Commentary> getCommentsByInterviewId(int interviewId) {
+        List<Commentary> comments = new ArrayList<>();
+
+        try {
+            PreparedStatement pst = connection.prepareStatement(
+                    "SELECT * FROM commentaries WHERE interview_id=?;"
+            );
+            pst.setInt(1, interviewId);
+
+            ResultSet rs = pst.executeQuery();
+
+            while (rs.next()) {
+
+                Commentary comment = new Commentary(
+                        rs.getInt("id"),
+                        rs.getString("content"),
+                        rs.getInt("user_id"),
+                        rs.getInt("interview_id"),
+                        rs.getDate("date")
+                );
+                comment.setUser(UserDAO.getDao().read(comment.getUserId()));
+                comments.add(comment);
+            }
+
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return comments;
     }
 }

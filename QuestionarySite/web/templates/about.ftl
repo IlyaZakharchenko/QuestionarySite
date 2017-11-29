@@ -10,7 +10,7 @@
     <#--<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>-->
     <link href="../css/bootstrap.min.css" rel="stylesheet">
     <script src="../js/jquery-3.2.1.min.js"></script>
-    <link href="../css/bootstrap.css" type="text/css" rel="stylesheet">
+    <link href="../css/bootstrap.css" rel="stylesheet">
     <script src="../js/jquery-ui-1.12.1/"></script>
     <script src="../js/bootstrap.js"></script>
     <link href="../css/top_menu.css" rel="stylesheet">

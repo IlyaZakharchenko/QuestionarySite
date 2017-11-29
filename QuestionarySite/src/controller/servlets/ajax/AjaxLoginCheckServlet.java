@@ -13,7 +13,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.sql.SQLException;
 import java.util.UUID;
 
 @WebServlet(name = "AjaxLoginCheckServlet", urlPatterns = "/ajax_check_login")
@@ -50,8 +49,7 @@ public class AjaxLoginCheckServlet extends HttpServlet {
             if (rememberMe) {
                 String cookieStr = String.valueOf(UUID.randomUUID());
                 Cookie c = new Cookie("user_id", cookieStr);
-                //TODO change time
-                c.setMaxAge(5 * 60);
+                c.setMaxAge(24 * 3600);
 
                 response.addCookie(c);
 
@@ -73,10 +71,7 @@ public class AjaxLoginCheckServlet extends HttpServlet {
 
         HashGen hashGen = new HashGen(password);
 
-        if (user != null) {
-            return hashGen.md5Hash().equals(user.getPassword());
-        }
+        return user != null && hashGen.md5Hash().equals(user.getPassword());
 
-        return false;
     }
 }
