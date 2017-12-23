@@ -1,0 +1,99 @@
+CREATE TABLE users
+(
+    id SERIAL NOT NULL PRIMARY KEY ,
+    email TEXT NOT NULL ,
+    password TEXT NOT NULL ,
+    username TEXT,
+    age INTEGER,
+    about_yourself TEXT,
+    img_path TEXT,
+    cookie TEXT
+        CONSTRAINT users_cookie_key
+            unique
+);
+
+CREATE TABLE interviews
+(
+    id SERIAL NOT NULL PRIMARY KEY ,
+    question TEXT NOT NULL ,
+    owner_id INTEGER NOT NULL 
+        CONSTRAINT interviews_owner_id_fkey
+            REFERENCES users
+                ON DELETE CASCADE ,
+    date DATE NOT NULL ,
+    is_archive BOOLEAN,
+    theme_id INTEGER
+        CONSTRAINT interviews_theme_id_fkey
+            REFERENCES themes,
+    check_type BOOLEAN,
+    is_anonim BOOLEAN,
+    can_comment BOOLEAN
+);
+
+CREATE TABLE commentaries
+(
+    id SERIAL NOT NULL PRIMARY KEY ,
+    content TEXT NOT NULL ,
+    user_id INTEGER NOT NULL 
+        CONSTRAINT commentaries_user_id_fkey
+            REFERENCES users
+                ON DELETE CASCADE ,
+    interview_id INTEGER NOT NULL 
+        CONSTRAINT commentaries_interview_id_fkey
+            REFERENCES interviews
+                ON DELETE CASCADE ,
+    date DATE NOT NULL 
+);
+
+CREATE TABLE votes
+(
+    user_id INTEGER NOT NULL 
+        CONSTRAINT votes_user_id_fkey
+            REFERENCES users
+                ON DELETE CASCADE ,
+    option_id INTEGER NOT NULL 
+        CONSTRAINT votes_option_id_fkey
+        REFERENCES options
+        ON DELETE CASCADE
+);
+
+CREATE TABLE themes
+(
+    id SERIAL NOT NULL PRIMARY KEY ,
+    name TEXT NOT NULL 
+);
+
+INSERT INTO themes (name)
+VALUES ('Работа'), ('Школа'), ('Техника'), ('Политика'), ('Машины'), ('Образование'), ('Интернет'), ('Мода'),
+  ('Без темы');
+
+
+CREATE TABLE options
+(
+    id SERIAL NOT NULL PRIMARY KEY ,
+    answer TEXT NOT NULL ,
+    img_path TEXT,
+    description TEXT,
+    interview_id INTEGER NOT NULL 
+        CONSTRAINT options_interview_id_fkey
+            REFERENCES interviews
+                ON DELETE CASCADE ,
+    count_vote INTEGER NOT NULL 
+);
+
+CREATE TABLE links
+(
+    link TEXT NOT NULL ,
+    option_id INTEGER NOT NULL 
+        CONSTRAINT links_option_id_fkey
+            REFERENCES options
+                ON DELETE CASCADE 
+);
+
+CREATE TABLE description_image
+(
+    img_path TEXT NOT NULL ,
+    option_id INTEGER NOT NULL 
+        CONSTRAINT description_image_option_id_fkey
+            REFERENCES options
+);
